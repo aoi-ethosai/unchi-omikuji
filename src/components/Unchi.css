@@ -1,0 +1,230 @@
+.unchi {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.unchi-emoji {
+  display: block;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.unchi-golden .unchi-emoji {
+  animation: golden-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes golden-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px #ffd700) drop-shadow(0 0 20px #ffa500);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 40px #ffa500);
+  }
+}
+
+.sparkles {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  pointer-events: none;
+}
+
+.sparkles::before,
+.sparkles::after {
+  content: '✨';
+  position: absolute;
+  font-size: 16px;
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+.sparkles::before {
+  top: 0;
+  right: 0;
+  animation-delay: 0s;
+}
+
+.sparkles::after {
+  bottom: 0;
+  left: 0;
+  animation-delay: 0.5s;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.unchi-rainbow .unchi-emoji {
+  animation: rainbow-shift 3s linear infinite;
+}
+
+@keyframes rainbow-shift {
+  0% {
+    filter: hue-rotate(0deg) drop-shadow(0 0 10px #ff69b4);
+  }
+  100% {
+    filter: hue-rotate(360deg) drop-shadow(0 0 10px #ff69b4);
+  }
+}
+
+.rainbow-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  background: conic-gradient(
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #8b00ff,
+    #ff0000
+  );
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(15px);
+  animation: rainbow-rotate 3s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rainbow-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.unchi-fire .unchi-emoji {
+  animation: fire-flicker 0.3s ease-in-out infinite;
+}
+
+@keyframes fire-flicker {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px #ff4500) drop-shadow(0 0 20px #ff0000);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #ffa500) drop-shadow(0 0 30px #ff4500);
+  }
+}
+
+.fire-particles {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fire-particles::before,
+.fire-particles::after {
+  content: '🔥';
+  position: absolute;
+  font-size: 12px;
+  animation: fire-rise 1s ease-out infinite;
+}
+
+.fire-particles::before {
+  left: -15px;
+  animation-delay: 0s;
+}
+
+.fire-particles::after {
+  left: 5px;
+  animation-delay: 0.3s;
+}
+
+@keyframes fire-rise {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.5);
+  }
+}
+
+.unchi-ice .unchi-emoji {
+  filter: drop-shadow(0 0 10px #00ced1) drop-shadow(0 0 5px #e0ffff);
+}
+
+.ice-crystals {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  pointer-events: none;
+}
+
+.ice-crystals::before,
+.ice-crystals::after {
+  content: '❄️';
+  position: absolute;
+  font-size: 12px;
+  animation: ice-float 2s ease-in-out infinite;
+}
+
+.ice-crystals::before {
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.ice-crystals::after {
+  bottom: 0;
+  right: 0;
+  animation-delay: 1s;
+}
+
+@keyframes ice-float {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+.unchi-crystal .unchi-emoji {
+  filter: drop-shadow(0 0 10px #87ceeb) drop-shadow(0 0 5px #e0ffff);
+  animation: crystal-shine 2s ease-in-out infinite;
+}
+
+@keyframes crystal-shine {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px #87ceeb) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #e0ffff) brightness(1.2);
+  }
+}
+
+.unchi-mega {
+  transform: scale(1.3);
+}
+
+.unchi-tiny {
+  transform: scale(0.7);
+}

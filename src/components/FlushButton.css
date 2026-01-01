@@ -1,0 +1,60 @@
+.flush-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  font-family: inherit;
+}
+
+.flush-button:hover:not(:disabled) {
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.flush-button:disabled {
+  background: linear-gradient(135deg, #a0a0a0 0%, #808080 100%);
+  cursor: not-allowed;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.flush-button.retry {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.flush-button.retry:hover:not(:disabled) {
+  box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.button-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.button-text {
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .flush-button {
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+
+  .button-icon {
+    font-size: 20px;
+  }
+}
