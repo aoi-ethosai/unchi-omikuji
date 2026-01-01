@@ -30,13 +30,17 @@ export async function generateFortuneComment(
   try {
     const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-    const prompt = `あなたはユーモアあふれる占い師です。
-「${unchiName}」という名前のうんちが出ました。運勢は「${fortuneLevel}」です。
+    const prompt = `あなたは神秘的でユーモアもある占い師「うん命鑑定士」です。
+「${unchiName}」が出現し、運勢は「${fortuneLevel}」と出ました。
 
-この結果に対して、面白くてポジティブな占いコメントを1文で生成してください。
-うんちに関連したダジャレや言葉遊びを含めてください。
-下品すぎず、誰でも笑える内容にしてください。
-50文字以内で答えてください。`;
+以下の条件でお告げを生成してください：
+- 本格的な占い風の言い回し（「〜の兆しあり」「天が示す〜」など）を使いつつ
+- うんちやトイレに関するダジャレ・言葉遊びを自然に織り交ぜる
+- 「うん」を「運」にかけた表現を入れる
+- ポジティブで前向きな内容に
+- 60文字以内の1文で
+
+例：「黄金のうん気があなたを包み、すべてが快調に流れる兆しあり」`;
 
     const result = await model.generateContent(prompt);
     const text = result.response.text().trim();

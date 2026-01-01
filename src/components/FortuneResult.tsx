@@ -57,13 +57,62 @@ export function FortuneResult({ result, isCommentLoading }: FortuneResultProps) 
           {result.unchi.description}
         </motion.p>
 
+        {/* 本格占い要素 */}
         <motion.div
-          className="comment-section"
+          className="lucky-section"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55 }}
+        >
+          <div className="lucky-grid">
+            <div className="lucky-item">
+              <span className="lucky-icon">🍀</span>
+              <span className="lucky-label">ラッキーアイテム</span>
+              <span className="lucky-value">{result.lucky.item}</span>
+            </div>
+            <div className="lucky-item">
+              <span className="lucky-icon">🎨</span>
+              <span className="lucky-label">ラッキーカラー</span>
+              <span className="lucky-value">
+                <span
+                  className="color-dot"
+                  style={{ backgroundColor: result.lucky.color.hex }}
+                />
+                {result.lucky.color.name}
+              </span>
+            </div>
+            <div className="lucky-item">
+              <span className="lucky-icon">🧭</span>
+              <span className="lucky-label">ラッキー方角</span>
+              <span className="lucky-value">{result.lucky.direction}</span>
+            </div>
+            <div className="lucky-item">
+              <span className="lucky-icon">⏰</span>
+              <span className="lucky-label">ラッキータイム</span>
+              <span className="lucky-value">{result.lucky.time}</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* アドバイス */}
+        <motion.div
+          className="advice-section"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <div className="comment-label">AIからのメッセージ</div>
+          <div className="advice-label">今日のアドバイス</div>
+          <p className="advice-text">{result.lucky.advice}</p>
+        </motion.div>
+
+        {/* AIコメント */}
+        <motion.div
+          className="comment-section"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          <div className="comment-label">AIからのうんメッセージ</div>
           <div className="comment-box">
             {isCommentLoading ? (
               <div className="loading-comment">

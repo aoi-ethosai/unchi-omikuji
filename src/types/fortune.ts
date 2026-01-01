@@ -22,10 +22,19 @@ export interface UnchiData {
   rarity: 1 | 2 | 3 | 4 | 5;
 }
 
+export interface LuckyInfo {
+  item: string;
+  color: { name: string; hex: string };
+  direction: string;
+  time: string;
+  advice: string;
+}
+
 export interface FortuneResult {
   unchi: UnchiData;
   fortune: FortuneLevel;
   comment: string;
+  lucky: LuckyInfo;
   timestamp: Date;
 }
 

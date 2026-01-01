@@ -1,6 +1,17 @@
 import { useState, useCallback } from 'react';
-import { UNCHI_TYPES, FORTUNE_LEVELS, FORTUNE_WEIGHTS } from '../constants/fortunes';
-import type { FortuneResult, UnchiData, FortuneLevel, AppPhase } from '../types/fortune';
+import {
+  UNCHI_TYPES,
+  FORTUNE_LEVELS,
+  FORTUNE_WEIGHTS,
+  UNCHI_MIN_FORTUNE,
+  FORTUNE_RANK,
+  LUCKY_ITEMS,
+  LUCKY_COLORS,
+  LUCKY_DIRECTIONS,
+  LUCKY_TIMES,
+  ADVICE_BY_FORTUNE,
+} from '../constants/fortunes';
+import type { FortuneResult, UnchiData, FortuneLevel, AppPhase, LuckyInfo } from '../types/fortune';
 import { useGemini } from './useGemini';
 
 function weightedRandomSelect<T>(
@@ -20,12 +31,44 @@ function weightedRandomSelect<T>(
   return items[items.length - 1];
 }
 
+function randomSelect<T>(items: T[]): T {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
 function drawUnchi(): UnchiData {
   return weightedRandomSelect(UNCHI_TYPES, (u) => 6 - u.rarity);
 }
 
 function drawFortuneLevel(): FortuneLevel {
   return weightedRandomSelect(FORTUNE_LEVELS, (f) => FORTUNE_WEIGHTS[f]);
+}
+
+function adjustFortuneForUnchi(unchi: UnchiData, fortune: FortuneLevel): FortuneLevel {
+  const minFortune = UNCHI_MIN_FORTUNE[unchi.id];
+
+  if (!minFortune) {
+    return fortune;
+  }
+
+  const currentRank = FORTUNE_RANK.indexOf(fortune);
+  const minRank = FORTUNE_RANK.indexOf(minFortune);
+
+  // 現在の運勢がminFortuneより悪い場合、minFortuneに引き上げる
+  if (currentRank > minRank) {
+    return minFortune;
+  }
+
+  return fortune;
+}
+
+function generateLuckyInfo(fortune: FortuneLevel): LuckyInfo {
+  return {
+    item: randomSelect(LUCKY_ITEMS),
+    color: randomSelect(LUCKY_COLORS),
+    direction: randomSelect(LUCKY_DIRECTIONS),
+    time: randomSelect(LUCKY_TIMES),
+    advice: randomSelect(ADVICE_BY_FORTUNE[fortune]),
+  };
 }
 
 export function useOmikuji() {
@@ -40,16 +83,15 @@ export function useOmikuji() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const unchi = drawUnchi();
-    let fortune = drawFortuneLevel();
-
-    if (unchi.id === 'golden' && ['凶', '末吉'].includes(fortune)) {
-      fortune = '大吉';
-    }
+    const rawFortune = drawFortuneLevel();
+    const fortune = adjustFortuneForUnchi(unchi, rawFortune);
+    const lucky = generateLuckyInfo(fortune);
 
     const newResult: FortuneResult = {
       unchi,
       fortune,
       comment: '',
+      lucky,
       timestamp: new Date(),
     };
 
